@@ -5,8 +5,8 @@ export interface SupabaseConfig {
   anonKey: string;
 }
 
-export const DEFAULT_SUPABASE_URL = 'https://jjwhyxsdfmfybkofccit.supabase.co';
-export const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impqd2h5eHNkZm1meWJrb2ZjY2l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2ODQxODMsImV4cCI6MjEwNjI2MDE4M30.sDz099eFPpoe4vSKmtbuXxAI7qP89b9_a5wIdv1q6MY';
+export const DEFAULT_SUPABASE_URL = 'https://khfhwxylstoxiacovdof.supabase.co';
+export const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoZmh3eHlsc3RveGlhY292ZG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2ODg2MDQsImV4cCI6MjEwNjI2NDYwNH0.0i0XqxS5lcxVYTtovvWh6wgofzorC807duYL7btF5l4';
 
 export function getActiveSupabaseConfig(): SupabaseConfig {
   let url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
@@ -18,7 +18,7 @@ export function getActiveSupabaseConfig(): SupabaseConfig {
       if (stored) {
         const parsed = JSON.parse(stored);
         // Eski projeye ait önbelleği otomatik temizle
-        if (parsed.url && parsed.url.includes('swfwzqekwxmsifmtfgfn')) {
+        if (parsed.url && (parsed.url.includes('swfwzqekwxmsifmtfgfn') || parsed.url.includes('jjwhyxsdfmfybkofccit') || parsed.url.includes('mlqkapoudziabpnbzxkz'))) {
           localStorage.removeItem('igm_supabase_config');
         } else {
           if (!url && parsed.url) url = parsed.url;
@@ -29,10 +29,10 @@ export function getActiveSupabaseConfig(): SupabaseConfig {
   }
 
   // Vercel Hobby veya Render gibi ortamlarda ortam değişkeni eksikse güvenli varsayılana fallback yap
-  if (!url || url.includes('placeholder') || !url.startsWith('http') || url.includes('swfwzqekwxmsifmtfgfn')) {
+  if (!url || url.includes('placeholder') || !url.startsWith('http') || url.includes('swfwzqekwxmsifmtfgfn') || url.includes('jjwhyxsdfmfybkofccit') || url.includes('mlqkapoudziabpnbzxkz')) {
     url = DEFAULT_SUPABASE_URL;
   }
-  if (!anonKey || anonKey.includes('placeholder') || anonKey.includes('8zEy6xIbaai89WXRAO0utzuLtrDgK1uUsl0UXW6yJ8c')) {
+  if (!anonKey || anonKey.includes('placeholder') || anonKey.includes('8zEy6xIbaai89WXRAO0utzuLtrDgK1uUsl0UXW6yJ8c') || anonKey.includes('sDz099eFPpoe4vSKmtbuXxAI7qP89b9_a5wIdv1q6MY')) {
     anonKey = DEFAULT_SUPABASE_ANON_KEY;
   }
 
@@ -85,10 +85,10 @@ export function getServerSupabaseClient(): SupabaseClient | null {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
   let anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '';
 
-  if (!url || url.includes('placeholder') || !url.startsWith('http')) {
+  if (!url || url.includes('placeholder') || !url.startsWith('http') || url.includes('swfwzqekwxmsifmtfgfn') || url.includes('jjwhyxsdfmfybkofccit') || url.includes('mlqkapoudziabpnbzxkz')) {
     url = DEFAULT_SUPABASE_URL;
   }
-  if (!anonKey || anonKey.includes('placeholder')) {
+  if (!anonKey || anonKey.includes('placeholder') || anonKey.includes('8zEy6xIbaai89WXRAO0utzuLtrDgK1uUsl0UXW6yJ8c') || anonKey.includes('sDz099eFPpoe4vSKmtbuXxAI7qP89b9_a5wIdv1q6MY')) {
     anonKey = DEFAULT_SUPABASE_ANON_KEY;
   }
 
